@@ -1,9 +1,9 @@
 ﻿
-namespace WinformsApp
+namespace SqliteDataAccess
 {
     // Data/AppDbContext.cs
     using Microsoft.EntityFrameworkCore;
-    using WinformsApp.Models;
+    using SqliteDataAccess.Entities;
 
     public class AppDbContext : DbContext
     {
@@ -13,6 +13,5 @@ namespace WinformsApp
         }
 
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<Product> Products { get; set; }
     }
 }

@@ -1,7 +1,9 @@
-using WinformsApp.Repository;
+
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SqliteDataAccess.Services;
 
 namespace WinformsApp
 {
@@ -24,18 +26,20 @@ namespace WinformsApp
             Application.Run(mainForm);
         }
 
-        public static IHostBuilder CreateHostBuilder() =>
-                    Host.CreateDefaultBuilder().ConfigureServices((context, services) =>
+        public static IHostBuilder CreateHostBuilder() => 
+            Host.CreateDefaultBuilder()
+            .ConfigureAppConfiguration((context, config) =>
+                    {
+                        config.SetBasePath(Directory.GetCurrentDirectory());
+                        config.AddJsonFile("appsettings.json", optional: false);
+                    }).
+            ConfigureServices((context, services) =>
            {
-               // Register DbContext with SQLite
-               services.AddDbContext<AppDbContext>(options =>
-                   options.UseSqlite("Data Source=appdata.db"));
-
-               // Register repositories
-               services.AddTransient<ICustomerRepository, CustomerRepository>();
+               // Register data services from library
+               services.AddDataServices(context.Configuration);
 
                // Register main form
-               services.AddSingleton<MainForm>();
+               services.AddTransient<MainForm>();
 
                // Register other forms
                services.AddTransient<CustomerForm>();

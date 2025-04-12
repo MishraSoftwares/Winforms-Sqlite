@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WinformsApp.Models;
+using SqliteDataAccess.Entities;
 
-namespace WinformsApp.Repository
+namespace SqliteDataAccess.Repository
 {
     public class CustomerRepository : ICustomerRepository
     {

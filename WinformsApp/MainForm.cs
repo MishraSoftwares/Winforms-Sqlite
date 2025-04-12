@@ -1,9 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using SqliteDataAccess.Entities;
+using SqliteDataAccess.Repository;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using WinformsApp.Models;
-using WinformsApp.Repository;
+
 
 namespace WinformsApp
 {
@@ -14,8 +15,8 @@ namespace WinformsApp
         private BindingSource _customerBindingSource = new();
 
         public MainForm(
-         ICustomerRepository customerRepository,
-         IServiceProvider serviceProvider)
+            ICustomerRepository customerRepository, 
+            IServiceProvider serviceProvider)
         {
             InitializeComponent();
             _customerRepository = customerRepository;
@@ -30,8 +31,7 @@ namespace WinformsApp
         private async Task LoadCustomersAsync()
         {
             var customers = await _customerRepository.GetAllAsync();
-            _customerBindingSource.DataSource = customers;
-            dataGridView1.DataSource = _customerBindingSource;
+            dataGridView1.DataSource = customers;
         }
 
         private async void btnAdd_Click(object sender, EventArgs e)

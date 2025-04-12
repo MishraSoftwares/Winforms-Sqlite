@@ -1,5 +1,7 @@
 ﻿
-using WinformsApp.Models;
+
+
+using SqliteDataAccess.Entities;
 
 namespace WinformsApp
 {
