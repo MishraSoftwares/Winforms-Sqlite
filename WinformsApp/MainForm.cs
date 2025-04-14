@@ -1,10 +1,6 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SqliteDataAccess.Entities;
 using SqliteDataAccess.Repository;
-using System.Windows.Forms;
-using System.Xml.Linq;
-
 
 namespace WinformsApp
 {
